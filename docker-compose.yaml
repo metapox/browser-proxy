@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mitmproxy:
+    image: mitmproxy/mitmproxy
+    volumes:
+      - ./scripts:/home/mitmproxy/scripts
+      - ./mitmproxy-keys:/home/mitmproxy/.mitmproxy
+    command: mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular
+    ports:
+      - "8080:8080"
