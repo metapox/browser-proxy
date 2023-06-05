@@ -1,0 +1,9 @@
+version: '3'
+services:
+  chrome:
+    build: ./browser
+    volumes:
+      - ./browser/scripts:/scripts
+    tty: true
+    ports:
+      - "9222:9222"
