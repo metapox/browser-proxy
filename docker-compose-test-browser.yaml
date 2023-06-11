@@ -1,0 +1,11 @@
+version: '3'
+services:
+  chrome:
+    build:
+      context: .
+      dockerfile: ./browser/Dockerfile
+    tty: true
+    ports:
+      - "9222:9222"
+    depends_on:
+      - mitmproxy
