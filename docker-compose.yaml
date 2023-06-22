@@ -2,11 +2,9 @@ version: '3'
 services:
   mitmproxy:
     image: mitmproxy/mitmproxy
-    command: >
-      bash -c "apt-get update &&
-               apt-get install -y procps &&
-               /bin/bash"
     volumes:
       - ./scripts:/home/mitmproxy/scripts
-    stdin_open: true
-    tty: true
+      - ./mitmproxy-keys:/home/mitmproxy/.mitmproxy
+    command: mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular
+    ports:
+      - "8080:8080"
