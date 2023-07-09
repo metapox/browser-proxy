@@ -11,11 +11,18 @@ logging.basicConfig(filename=log_file, level=logging.INFO)
 def response(flow: http.HTTPFlow) -> None:
     url = urlparse(flow.request.pretty_url)
     path = os.path.join(base_dir, url.netloc, url.path.strip('/'))
+    index_path = os.path.join(path, 'index.html')
+    matched_path = None
 
     if os.path.isfile(path):
+        matched_path = path
+    elif os.path.isfile(index_path):
+        matched_path = index_path
+
+    if matched_path:
         logging.info('Override response for %s', flow.request.pretty_url)
-        with open(path, 'r') as f:
-            flow.response = http.HTTPResponse.make(
+        with open(matched_path, 'r') as f:
+            flow.response = http.Response.make(
                 200,
                 f.read(),
                 {"Content-Type": "text/html"}
