@@ -1,0 +1,14 @@
+[Unit]
+Description=mitmproxy
+After=network.target
+
+[Service]
+ExecStart=/home/mitmproxy/scripts/run.sh start
+Restart=always
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=PYTHONPATH=/usr/local/lib/python3.7/site-packages
+
+[Install]
+WantedBy=multi-user.target
