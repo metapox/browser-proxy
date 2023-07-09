@@ -1,10 +1,15 @@
 version: '3'
 services:
   mitmproxy:
-    image: mitmproxy/mitmproxy
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./scripts:/home/mitmproxy/scripts
       - ./mitmproxy-keys:/home/mitmproxy/.mitmproxy
-    command: mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular
+      - ./override-files:/home/mitmproxy/override-files
+    command: /bin/bash
+    stdin_open: true
+    tty: true
     ports:
       - "8080:8080"

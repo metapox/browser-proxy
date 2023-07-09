@@ -1,2 +1,3 @@
 mitmproxy-keys/*
 scripts/__pycache__/*
+override-files/*

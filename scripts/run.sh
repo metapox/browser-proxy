@@ -2,7 +2,7 @@
 
 start() {
     echo "Starting process..."
-    mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular &
+    mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular > /var/log/mitmproxy/mitm.log &
 }
 
 stop() {
