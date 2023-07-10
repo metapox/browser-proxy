@@ -2,6 +2,7 @@ from mitmproxy import http
 from urllib.parse import urlparse
 import os
 import logging
+import gzip
 
 log_file = '/var/log/mitmproxy/app.log'
 base_dir = '/home/mitmproxy/override-files/'
@@ -19,11 +20,15 @@ def response(flow: http.HTTPFlow) -> None:
     elif os.path.isfile(index_path):
         matched_path = index_path
 
+    # TODO check request headers for accept-encoding
     if matched_path:
         logging.info('Override response for %s', flow.request.pretty_url)
         with open(matched_path, 'r') as f:
             flow.response = http.Response.make(
                 200,
-                f.read(),
-                {"Content-Type": "text/html"}
+                gzip.compress(f.read()),
+                {
+                    "Content-Type": "text/html; charset=UTF-8",
+                    "Content-Encoding": "gzip"
+                }
             )
