@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Install mitmproxy
 yum install -y python3 python3-pip procps git
 pip3 install mitmproxy

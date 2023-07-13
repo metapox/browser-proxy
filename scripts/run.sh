@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/bin/bash -e
 
 start() {
     echo "Starting process..."
-    mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular > /var/log/mitmproxy/mitm.log &
+    /usr/local/bin/mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular > /var/log/mitmproxy/mitm.log &
 }
 
 stop() {
     echo "Stopping process"
-    pkill -f "mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular"
+    pkill -f "/usr/local/bin/mitmdump -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular"
     echo "Done"
 }
 
