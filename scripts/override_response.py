@@ -2,12 +2,8 @@ from mitmproxy import http
 from urllib.parse import urlparse
 import os
 import logging
-import gzip
 
-log_file = '/var/log/mitmproxy/app.log'
 base_dir = '/home/mitmproxy/override-files/'
-
-logging.basicConfig(filename=log_file, level=logging.INFO)
 
 def response(flow: http.HTTPFlow) -> None:
     url = urlparse(flow.request.pretty_url)
