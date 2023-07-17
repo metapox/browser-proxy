@@ -2,7 +2,7 @@
 
 # Install mitmproxy
 yum install -y python3 python3-pip procps git
-pip3 install mitmproxy
+pip3 install mitmproxy pyyaml
 
 # making log dir
 mkdir -p /var/log/mitmproxy/
