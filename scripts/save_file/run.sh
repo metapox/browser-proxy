@@ -2,12 +2,12 @@
 
 start() {
     echo "Starting process..."
-    /usr/local/bin/mitmdump -p 9090 -s /home/mitmproxy/scripts/save_file/save_file.py --ssl-insecure --mode regular > /var/log/mitmproxy/save_file.log &
+    mitmdump -p 9090 -s /home/mitmproxy/scripts/save_file/save_file.py --ssl-insecure --mode regular > /var/log/mitmproxy/save_file.log &
 }
 
 stop() {
     echo "Stopping process"
-    pkill -f "/usr/local/bin/mitmdump -p 9090 -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular"
+    pkill -f "mitmdump -p 9090 -s /home/mitmproxy/scripts/override_response.py --ssl-insecure --mode regular"
     echo "Done"
 }
 
